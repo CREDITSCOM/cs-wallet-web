@@ -1,0 +1,49 @@
+﻿.loader-layer {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-wrap {
+    background-color: #f5f5f5;
+}
+
+.loader-inner {
+    padding: 30px;
+    min-width: 300px;
+}
+
+.loader-label {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#loader-animate {
+    background-color: #007bff;
+    width: 100%;
+    height: 6px;
+    margin-bottom: 5px;
+    margin: 0 auto;
+    animation: Loader 1500ms infinite ease;
+    animation-direction: alternate;
+}
+
+@keyframes Loader {
+    from 
+    {
+        width: 10%;
+    }
+    to 
+    {
+        width: 100%;
+    }
+}

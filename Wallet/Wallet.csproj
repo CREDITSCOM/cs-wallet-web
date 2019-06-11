@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{93ACAD13-BCF0-4D4A-814D-45E3B65C3690}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wallet</RootNamespace>
+    <AssemblyName>Wallet</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Base58Check, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Base58Check.0.2.0\lib\Net40\Base58Check.dll</HintPath>
+    </Reference>
+    <Reference Include="Blake2s, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\blake2s-net.0.1.0\lib\net\Blake2s.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rebex.Ed25519, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rebex.Elliptic.Ed25519.0.9.3\lib\net40\Rebex.Ed25519.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Thrift45, Version=0.11.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Thrift_4_0\Thrift45.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Api\Route.cs" />
+    <Compile Include="Attr\Culture.cs" />
+    <Compile Include="BcService\ApiWork_4_2.cs" />
+    <Compile Include="BcService\Thrift_4_2\Annotation.cs" />
+    <Compile Include="BcService\Thrift_4_2\APIResponse.cs" />
+    <Compile Include="BcService\Thrift_4_2\ByteCodeObject.cs" />
+    <Compile Include="BcService\Thrift_4_2\ClassObject.cs" />
+    <Compile Include="BcService\Thrift_4_2\MethodArgument.cs" />
+    <Compile Include="BcService\Thrift_4_2\MethodDescription.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\Amount.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\AmountCommission.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\API.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\ContractAllMethodsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\CumulativeAmount.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\PeriodStats.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\Pool.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\PoolInfoGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\PoolListGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\PoolTransactionsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SealedTransaction.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContract.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractAddressesListGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractCompileResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractDataResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractDeploy.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractInvocation.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractMethod.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractMethodArgument.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartContractsListGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartDeployTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartExecutionTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartMethodParamsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartOperationState.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartStateTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SmartTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\StatsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\SyncStateResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenBalance.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenBalancesResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenDeployTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenHolder.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenHoldersResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenHoldersSortField.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenInfoResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokensListResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokensListSortField.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenStandart.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenTransaction.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenTransactionsResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenTransfer.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenTransfersResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TokenTransferTransInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\Transaction.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionFlowResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionId.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionsStateGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionState.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TransactionType.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TrustedGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\TrustedInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletBalanceGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletData.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletDataGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletIdGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletInfo.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletsGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\NodeApi\WalletTransactionsCountGetResult.cs" />
+    <Compile Include="BcService\Thrift_4_2\object.cs" />
+    <Compile Include="BcService\Thrift_4_2\Variant.cs" />
+    <Compile Include="Areas\Api\ApiController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApiWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransferModel\SmartContractInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\loader.css" />
+    <Content Include="Content\css\Style.css" />
+    <Content Include="Content\image\bg-bl.jpg" />
+    <Content Include="Content\image\favicon.png" />
+    <Content Include="Content\image\icon\icons8-invisible.png" />
+    <Content Include="Content\image\icon\icons8-visible.png" />
+    <Content Include="Content\image\icon\search-ico.png" />
+    <Content Include="Content\image\index\background.png" />
+    <Content Include="Content\image\index\main-01-01.svg" />
+    <Content Include="Content\image\index\main-02-01.svg" />
+    <Content Include="Content\image\index\main-03-01.svg" />
+    <Content Include="Content\image\logo.png" />
+    <Content Include="Content\image\main\logo.png" />
+    <Content Include="Content\js\Extension.js" />
+    <Content Include="Content\js\JAVA\ace.js" />
+    <Content Include="Content\js\JAVA\mode-java.js" />
+    <Content Include="Content\js\JAVA\theme-twilight.js" />
+    <Content Include="Content\js\Nacl\nacl.min.js" />
+    <Content Include="Content\js\Resourse\Resourse.en.js" />
+    <Content Include="Content\js\Resourse\Resourse.es.js" />
+    <Content Include="Content\js\Resourse\Resourse.jp.js" />
+    <Content Include="Content\js\Resourse\Resourse.ko.js" />
+    <Content Include="Content\js\Resourse\Resourse.ru.js" />
+    <Content Include="Content\js\Resourse\Resourse.vi.js" />
+    <Content Include="Content\js\Resourse\Resourse.zh.js" />
+    <Content Include="Content\js\Signature_4_0.js" />
+    <Content Include="Content\js\Signature_4_2.js" />
+    <Content Include="Content\js\thrift\API.js" />
+    <Content Include="Content\js\thrift\api_types.js" />
+    <Content Include="Content\js\thrift\general_types.js" />
+    <Content Include="Content\js\thrift\thrift.js" />
+    <Content Include="Content\js\Wallet.js" />
+    <Content Include="Content\js\Wallet_JS.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Thrift45.dll" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\TestNet.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="Views\Home\index.cshtml" />
+    <Content Include="Views\Shared\_Layout_t.cshtml" />
+    <Content Include="Views\Home\JS.cshtml" />
+    <Content Include="Views\Shared\_Layout_JS.cshtml" />
+    <Content Include="Views\Home\DappsNet.cshtml" />
+    <Content Include="Views\Shared\_LayoutDapsNet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49281</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49281/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
