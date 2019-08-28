@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\Db.dll.config
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\Db.dll
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\Db.pdb
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\EntityFramework.dll
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\EntityFramework.xml
+C:\Users\Administrator\Desktop\Wallet\Db\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Administrator\Desktop\Wallet\Db\obj\Release\Db.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Wallet\Db\obj\Release\Db.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Wallet\Db\obj\Release\Db.csproj.CopyComplete
+C:\Users\Administrator\Desktop\Wallet\Db\obj\Release\Db.dll
+C:\Users\Administrator\Desktop\Wallet\Db\obj\Release\Db.pdb

@@ -1,13 +1,34 @@
-﻿@{
+﻿@using Db.DbTable
+@{
     string currentLang;
     if (ViewContext.RouteData.Values["lang"] != null)
     {
-        currentLang = ViewContext.RouteData.Values["lang"].ToString().ToLowerInvariant();
+        currentLang = ViewContext.RouteData.Values["lang"].ToString().ToUpperInvariant();
     }
     else
     {
-        currentLang = "en";
+        currentLang = "EN";
     }
+
+    string MenuLang = "";
+
+    var langs = new List<Tuple<string, string>> {
+        new Tuple<string, string>("EN","EN" ),
+        new Tuple<string, string>("ES","ES" ),
+        new Tuple<string, string>("JP","JP" ),
+        new Tuple<string, string>("KR","KR" ),
+        new Tuple<string, string>("VI","VI" ),
+        new Tuple<string, string>("RU","RU" )
+    };
+    foreach (var item in langs)
+    {
+        if (currentLang != item.Item1)
+        {
+            MenuLang = MenuLang + $"<div><a href=\"../{item.Item1}\">{item.Item2}</a></div>";
+        }
+    }
+
+    var nets = ViewBag.Networks as List<Networks>;
 }
 
 
@@ -19,7 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&amp;subset=cyrillic" rel="stylesheet">
     <link rel="icon" href="~/Content/image/favicon.png">
-    <link rel="stylesheet" href="~/Content/css/Style.css?xcvbsetbhz" />
+    <link rel="stylesheet" href="~/Content/css/Style.css?bfgb" />
     <link rel="stylesheet" href="~/Content/css/loader.css?sdfgsert" />
 
     @Scripts.Render("~/Content/js/Nacl/nacl.min.js")
@@ -33,7 +54,7 @@
     <script src="~/Content/js/JAVA/mode-java.js"></script>
     <script src="~/Content/js/JAVA/theme-twilight.js"></script>
 
-    <script src="~/Content/js/Wallet.js?vbdggf"></script>
+    <script src="~/Content/js/Wallet.js?cvbtb"></script>
 
 </head>
 <body>
@@ -42,21 +63,35 @@
             <div class="content top-bar__inner">
                 <div class="top-bar__el">
                     <select class="select" id="Net" onchange="SetUrl(this);">
-                        <option value="Main" mon="CreditsNetwork">CreditsNetwork</option>
-                        <option value="Release_4_2_t" mon="testnet-r4_2">Release 4.2</option>
-                        <option value="Devs-Dapps-Testnet" mon="Devs-Dapps-Testnet">Devs & dapps Test net</option>
+                        @foreach (Networks n in nets)
+                        {
+                            <option value="@n.Name" mon="@n.MonitorLink">@n.Title</option>
+                        }
                     </select>
                 </div>
                 <div class="top-bar__el">
-                    <a onclick="window.open('https://developers.credits.com/en/Articles/a_How_to_use_Web_Wallet')" class="el__top-menu-el">How to use</a>
-                    <a onclick="window.open('https://developers.credits.com/en/')" class="el__top-menu-el">Developers</a>
+                    <a onclick="window.open('https://developers.credits.com/en/Articles/a_How_to_use_Web_Wallet')" class="el__top-menu-el font-weight-500">FAQ</a>
+                    <a onclick="window.open('https://developers.credits.com/en/')" class="el__top-menu-el font-weight-500">Support</a>
+                    <div class="langBox">
+                        <div>
+                            <img src="~/Content/image/Flags/flag.@(currentLang).png" alt="">
+                            <div>
+                                <div>@currentLang</div>
+                                <div class="lang">
+                                    @Html.Raw(MenuLang)
+                                </div>
+                            </div>
+                            <div class="arrow-gray"></div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="content inner-wrap">
             <div onclick="document.location.href = '/'" class="logo-wrap" style="cursor:pointer">
                 <a class="logo">
-                    <img src="~/Content/image/logo.png?jgf" alt="Logo Credits Wallet">
+                    <img src="~/Content/image/logo.png" alt="Logo Credits Wallet">
                 </a>
             </div>
             <div class="header-wrap">
@@ -64,13 +99,56 @@
                     <div class="wrap_menu">
                         <div class="menu_item" onclick="document.location.href = '/'">Home</div>
                         <div class="menu_item" onclick="window.open('https://developers.credits.com/en/Articles/a_Web_Wallet')">About</div>
-                        <div class="menu_item" onclick="window.open('https://github.com/CREDITSCOM/CS-Wallet-web')">Github</div>
+                        <div class="menu_item" onclick="window.open('https://github.com/CREDITSCOM/cs-wallet-web')">Github</div>
                         <div class="menu_item" onclick="window.open('https://monitor.credits.com/'+ Monitor)">Monitor</div>
+                        <div class="menu_item" id="TopMenuRegister" onclick="RenderKey()">Register</div>
+                        <div class="menu_item" id="TopMenuLogin" onclick="SignIn()">Login</div>
+                        <div class="menu_item" id="TopMenuLogout" style="display:none;" onclick="document.location.href = '/'">Logout</div>
                     </div>
                 </nav>
             </div>
         </div>
     </header>
+
+
+
+    @*<header class="header">
+            <div class="top-bar">
+                <div class="content top-bar__inner">
+                    <div class="top-bar__el">
+                        <select class="select" id="Net" onchange="SetUrl(this);">
+                            <option value="Main" mon="CreditsNetwork">CreditsNetwork</option>
+                            <option value="testnet-r4_2" mon="testnet-r4_2">Release 4.2</option>
+                            <option value="DevsDappsTestnet" mon="DevsDappsTestnet">Devs & dapps Test net</option>
+                        </select>
+                    </div>
+                    <div class="top-bar__el">
+                        <a onclick="window.open('https://developers.credits.com/en/Articles/a_How_to_use_Web_Wallet')" class="el__top-menu-el">How to use</a>
+                        <a onclick="window.open('https://developers.credits.com/en/')" class="el__top-menu-el">Developers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="content inner-wrap">
+                <div onclick="document.location.href = '/'" class="logo-wrap" style="cursor:pointer">
+                    <a class="logo">
+                        <img src="~/Content/image/logo.png?jgf" alt="Logo Credits Wallet">
+                    </a>
+                </div>
+                <div class="header-wrap">
+                    <nav class="menu">
+                        <div class="wrap_menu">
+                            <div class="menu_item" onclick="document.location.href = '/'">Home</div>
+                            <div class="menu_item" onclick="window.open('https://developers.credits.com/en/Articles/a_Web_Wallet')">About</div>
+                            <div class="menu_item" onclick="window.open('https://github.com/CREDITSCOM/cs-wallet-web')">Github</div>
+                            <div class="menu_item" onclick="window.open('https://monitor.credits.com/'+ Monitor)">Monitor</div>
+                            <div class="menu_item" id="TopMenuRegister" onclick="RenderKey()">Register</div>
+                            <div class="menu_item" id="TopMenuLogin" onclick="SignIn()">Login</div>
+                            <div class="menu_item" id="TopMenuLogout" style="display:none;" onclick="document.location.href = '/'">Logout</div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>*@
     <div class="wrap">
         @RenderBody()
     </div>
@@ -86,21 +164,6 @@
         </div>
     </div>
     <footer class="wrap-footer">
-        <div class="wrap-footer-row mx-1400">
-            <div class="footer-col-1 colored">
-                <h2>About</h2>
-                <ul>
-                    <li><a class="footer-link" href="https://credits.com" target="_blank">Credits.com</a></li>
-                    <li><a class="footer-link" href="https://monitor.credits.com" target="_blank">Monitor.credits.com</a></li>
-                </ul>
-            </div>
-            <div class="footer-col-2 colored footer-col-hiddeble">
-            </div>
-            <div class="footer-col-3 colored footer-col-hiddeble">
-            </div>
-            <div class="footer-col-4">
-            </div>
-        </div>
         <div class="wrap-footer-row copyback">
             <div class="footer-copyright">
                 <div class="footer-copy">

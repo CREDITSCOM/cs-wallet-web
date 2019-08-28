@@ -1,5 +1,4 @@
-﻿var Url = "169.50.169.11";
-var Port = "8081";
+﻿
 var Monitor = "r3";
 var Public, Private;
 

@@ -1,0 +1,15 @@
+﻿@using Db.DbTable
+@{
+    ViewBag.Title = "Add";
+    var nets = ViewBag.Networks as List<Networks>;
+}
+@model Db.DbTable.IpNet
+<h2>Add</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.DropDownListFor(m => m.NetWork, new SelectList(nets, "Id", "Name"))<br/>
+    @Html.TextBoxFor(m => m.Ip, new { placeholder = "Ip" })<br />
+    @Html.TextBoxFor(m => m.Aport, new { placeholder = "Aport" })<br />
+    @Html.TextBoxFor(m => m.Tport, new { placeholder = "Tport" })
+    <button>Add</button>
+}

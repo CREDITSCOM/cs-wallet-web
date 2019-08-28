@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Areas/Identity/Views/Shared/_Layout.cshtml";
+}
+@model Wallet.Areas.Identity.Models.AuthorizationModel
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    <div>
+        @Html.TextBoxFor(m => m.Login,new { placeholder = "Login" })
+        <br />
+        @Html.ValidationMessageFor(m => m.Login)
+    </div>
+    <div>
+        @Html.TextBoxFor(m => m.Password, new { placeholder = "Password" })
+        <br />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div>
+        @Html.ValidationMessage("")
+    </div>
+    <div>
+        <button>
+            Sign in
+        </button>
+    </div>
+}
+@section Style
+{
+    <style>
+        form 
+        {
+            margin: 0px auto;
+            width: 200px;
+            background: grey;
+            padding: 5px;
+        }
+        div 
+        {
+            width: 100%;
+            margin: 5px 0px;
+        }
+        input 
+        {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button 
+        {
+            cursor: pointer;
+            display: block;
+            background: #007bff;
+            width: 80%;
+            margin: 0px auto;
+            border: 0px;
+            color: white;
+            padding: 5px 0px;
+        }
+    </style>
+}

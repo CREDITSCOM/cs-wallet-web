@@ -1,0 +1,11 @@
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Release\netstandard2.0\Credtis Api Connect.deps.json
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Release\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Release\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Release\netstandard2.0\Thrift45.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.csproj.CopyComplete
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Release\netstandard2.0\Credtis Api Connect.pdb

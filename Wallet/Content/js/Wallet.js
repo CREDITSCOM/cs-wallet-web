@@ -1,4 +1,9 @@
-﻿var Url = "169.50.169.11";
+﻿String.prototype.replaceAll = function (oldStr, newStr) {
+    let v = this;
+    while (v.indexOf(oldStr) > -1) v = v.replace(oldStr, newStr);
+    return v;
+};
+
 var Port = "8081";
 var Monitor = "r3";
 var Public, Private;
@@ -37,7 +42,6 @@ function SetUrl(el) {
 
 function index() {
     let Text = Resourse();
-
 
     let Background = document.createElement("div");
     Background.className = "bg-block text-center";
@@ -480,6 +484,21 @@ function SignIn(CallEv) {
 }
 
 function OpenAcc(CallEv, el) {
+    let TopMenuRegister = document.getElementById("TopMenuRegister");
+    if (TopMenuRegister !== undefined)
+    {
+        TopMenuRegister.remove();
+    }
+    let TopMenuLogin = document.getElementById("TopMenuLogin");
+    if (TopMenuLogin !== undefined) {
+        TopMenuLogin.remove();
+    }
+    let TopMenuLogout = document.getElementById("TopMenuLogout");
+    if (TopMenuLogout !== undefined) {
+        TopMenuLogout.removeAttribute("style");
+    }
+    
+
     let ErrorPub = document.getElementById("ErrorPub");
     let ErrorPriv = document.getElementById("ErrorPriv");
 
@@ -503,153 +522,46 @@ function OpenAcc(CallEv, el) {
     Public = Base58.decode(Public);
     Private = Base58.decode(Private);
 
-    document.getElementById("Work").innerHTML = "";
+    document.getElementById("Work").innerHTML = `<div class="row content content-inner">
+    <div class="left-bar">
+        <div class="account_field mb-50">
+            <div class="hiddenly-ac hidden-acc">
+                <div class="left-bar-title">
+                    <div class="font_w_600">${Text.Acc_Desc_1}</div><a><img src="../Content/image/icon/copy.png" id="CopyWalletKeyButton" alt=""></a><!--<a><img src="../Content/image/icon/Qr.png" alt=""></a>-->
+                </div>
+                <div class="breaked mb-25" id="WalletKey">${Base58.encode(Public)}</div >
+                <div class="left-bar-title">
+                    <div class="font_w_600">${Text.Acc_Desc_2}</div>
+                    <a class="d-flex-center"><img id="UpdateBalanceButton" src="../Content/image/icon/Reload.png" alt=""></a>
+                </div>
+                <div class="breaked" id="Balance">
+                    <table class="balance_table">
+                    </table>
+                </div>
+                <div class="slide-popup mb-25" id="CoinMarketCap"></div>
+                <div class="font_w_600">Token:</div>
+                <div class="breaked" id="BalanceToken"><table class="balance_table"></table></div>
+                <div class="button-balanceToken" id="ShowTokenListButton"><div class="arrow-top"></div></div>
+                <div class="breaked mb-20"></div>
+                <div><a class="link" href="https://monitor.credits.com/${Monitor}/account/${Base58.encode(Public)}" target="_blank" id="MonitorHistory"><img src="../Content/image/icon/monitorDertailed.png" alt="">Detailed transaction history</a></div>
+                <div><a id="PerformTransactionButton" class="link"><img src="../Content/image/icon/PerformTransaction.png" alt="">Perform a transaction</a></div>
+                <div><a id="SmartContractButton" class="link"><img  src="../Content/image/icon/SmarContract.png" alt="">Smart contracts</a></div>
+                <div><a id="CreateSmartButton" class="link"><img src="../Content/image/icon/CreateSmart.png" alt="">Create smart contract</a></div>
+                <div><a id="CreateTokenButton" class="link"><img src="../Content/image/icon/CreateToken.png" alt="">Create a token</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="w-content"></div>
+</div>`;
+    document.getElementById("CopyWalletKeyButton").onclick = CopyWalletKey;
+    document.getElementById("UpdateBalanceButton").onclick = UpdateBalance;
+    document.getElementById("ShowTokenListButton").onclick = ShowToken.bind(this);
+    document.getElementsByClassName("left-bar")[0].appendChild(Faq());
+    document.getElementById("PerformTransactionButton").onclick = RanderPayment;
+    document.getElementById("SmartContractButton").onclick = RenderExecuterSmartContract;
+    document.getElementById("CreateSmartButton").onclick = RenderCreateSmartContract;
+    document.getElementById("CreateTokenButton").onclick = RenderCreateToken;
 
-    let div = document.createElement("div");
-    div.className = "row content content-inner";
-
-    let div2 = document.createElement("div");
-    div2.className = "left-bar";
-    div.appendChild(div2);
-
-    let div3 = document.createElement("div");
-    div3.className = "account_field mb-50";
-    div2.appendChild(div3);
-
-    let h2 = document.createElement("h2");
-    h2.className = "title";
-    h2.innerText = Text.Acc_h2_1;
-    div3.appendChild(h2);
-
-    let div4 = document.createElement("div");
-    div4.className = "hiddenly-ac hidden-acc";
-    div3.appendChild(div4);
-
-    let p = document.createElement("div");
-    p.className = "font_w_600";
-    p.innerText = Text.Acc_Desc_1;
-    div4.appendChild(p);
-
-    p = document.createElement("div");
-    p.className = "breaked";
-    p.id = "WalletKey";
-    p.innerText = Base58.encode(Public);
-    div4.appendChild(p);
-
-    let a = document.createElement("a");
-    a.className = "small-bbatton mb-20";
-    a.innerText = "Copy";
-    a.onclick = CopyWalletKey;
-    div4.appendChild(a);
-
-    p = document.createElement("div");
-    p.className = "font_w_600";
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "small-bbatton";
-    a.innerText = Text.Acc_Desc_11;
-    a.onclick = UpdateBalance;
-    p.appendChild(a);
-
-
-    let span = document.createElement("span");
-    span.innerText = Text.Acc_Desc_2;
-    p.appendChild(span);
-
-    p = document.createElement("div");
-    p.className = "breaked";
-    p.id = "Balance";
-    div4.appendChild(p);
-
-    let table = document.createElement("table");
-    table.className = "balance_table";
-    p.appendChild(table);
-
-    p = document.createElement("div");
-    p.className = "slide-popup";
-    p.id = "CoinMarketCap";
-    p.innerText = "TRext";
-    div4.appendChild(p);
-
-    p = document.createElement("div");
-    p.className = "font_w_600";
-    p.innerText = Text.Acc_Desc_14;
-    div4.appendChild(p);
-
-    p = document.createElement("div");
-    p.className = "breaked";
-    p.id = "BalanceToken";
-    div4.appendChild(p);
-
-    table = document.createElement("table");
-    table.className = "balance_table";
-    p.appendChild(table);
-
-    a = document.createElement("a");
-    a.className = "small-bbatton-c";
-    a.innerText = "Show More";
-    a.onclick = ShowToken.bind(this);
-    div4.appendChild(a);
-
-    p = document.createElement("div");
-    p.className = "breaked mb-20";
-    div4.appendChild(p);
-
-    p = document.createElement("div");
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "link";
-    a.href = 'https://monitor.credits.com/' + Monitor +'/account/' + Base58.encode(Public);
-    a.target = "_blank";
-    a.id = "MonitorHistory";
-    a.innerText = Text.Acc_Desc_3;
-    p.appendChild(a);
-
-    p = document.createElement("div");
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "link";
-    a.onclick = RanderPayment;
-    a.innerText = Text.Acc_Desc_13;
-    p.appendChild(a);
-
-    p = document.createElement("div");
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "link";
-    a.onclick = RenderExecuterSmartContract;
-    a.innerText = Text.Acc_Desc_10;
-    p.appendChild(a);
-
-    p = document.createElement("div");
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "link";
-    a.onclick = RenderCreateSmartContract;
-    a.innerText = "Create smart contract";
-    p.appendChild(a);
-
-    p = document.createElement("div");
-    div4.appendChild(p);
-
-    a = document.createElement("a");
-    a.className = "link";
-    a.onclick = RenderCreateToken;
-    a.innerText = Text.Acc_Desc_12;
-    p.appendChild(a);
-
-    div2.appendChild(Faq());
-
-    div2 = document.createElement("div");
-    div2.className = "w-content";
-    div.appendChild(div2);
-
-    document.getElementById("Work").appendChild(div);
     switch (CallEv) {
         case "Token":
             RenderCreateToken();
@@ -660,8 +572,6 @@ function OpenAcc(CallEv, el) {
         default:
             RanderPayment();
     }
-
-    UpdateBalance();
 }
 
 function RenderCreateSmartContract()
@@ -676,6 +586,12 @@ function RenderCreateSmartContract()
     h2.innerText = "Write a smart contract";
     el.appendChild(h2);
 
+    let input = document.createElement("input");
+    input.classList = "main-input";
+    input.placeholder = "Fee";
+    input.id = "Fee";
+    el.appendChild(input);
+
     div = document.createElement("div");
     div.className = "mb-20";
     el.appendChild(div);
@@ -684,8 +600,6 @@ function RenderCreateSmartContract()
     textarea.className = "text_area_fluid";
     textarea.id = "SmartEditor";
     div.appendChild(textarea);
-
-
 
     div = document.createElement("div");
     div.className = "row mb-50";
@@ -718,10 +632,8 @@ function ShowToken(ev) {
     if (el !== undefined) {
         if (el.style.maxHeight === "") {
             el.style.maxHeight = "unset";
-            ev.target.innerText = "Show Less";
         } else {
             el.style.maxHeight = "";
-            ev.target.innerText = "Show More";
         }
     }
 }
@@ -760,7 +672,7 @@ function OpenMiniInfoPopap() {
 
     let span = document.createElement("span");
     span.innerText = "X";
-    span.onclick = function () { CloseMiniInfoPopap(index) };
+    span.onclick = function () { CloseMiniInfoPopap(index); };
     div2.appendChild(span);
 
     div2 = document.createElement("div");
@@ -972,8 +884,7 @@ function CreateSmartToken() {
         TotalCoins = TotalCoins.replace(/\s/, '');
     }
 
-    let Smart = `
-import com.credits.scapi.v0.BasicStandard;
+    let Smart = `import com.credits.scapi.v0.BasicStandard;
 import com.credits.scapi.v0.SmartContract;
 
 import java.math.BigDecimal;
@@ -984,7 +895,7 @@ import java.util.Optional;
 import static java.math.BigDecimal.ROUND_DOWN;
 import static java.math.BigDecimal.ZERO;
 
-public class Token${Symbol} extends SmartContract implements BasicStandard {
+public class TokenBasicStandard${Symbol} extends SmartContract implements BasicStandard {
 
     private final String owner;
     private final BigDecimal tokenCost;
@@ -993,16 +904,18 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
     private String name;
     private String symbol;
     private BigDecimal totalCoins;
+    private BigDecimal freeCoins;
     private HashMap<String, Map<String, BigDecimal>> allowed;
     private boolean frozen;
 
-    public Token${Symbol}() {
+    public TokenBasicStandard${Symbol}() {
         super();
         name = "${SmartName}";
         symbol = "${Symbol}";
         decimal = ${Decimal === `` ? 0 : Decimal};
-        tokenCost = new BigDecimal(${TokenCost === `` ? 0 : TokenCost}).setScale(decimal, ROUND_DOWN);
+        tokenCost = new BigDecimal(1).setScale(decimal, ROUND_DOWN);
         totalCoins = new BigDecimal(${TotalCoins === `` ? 0 : TotalCoins}).setScale(decimal, ROUND_DOWN);
+        freeCoins = new BigDecimal(${TotalCoins === `` ? 0 : TotalCoins}).setScale(decimal, ROUND_DOWN);
         owner = initiator;
         allowed = new HashMap<>();
         balances = new HashMap<>();
@@ -1057,9 +970,6 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
         contractIsNotFrozen();
         if (!to.equals(initiator)) {
             BigDecimal decimalAmount = toBigDecimal(amount);
-            if(decimalAmount.compareTo(ZERO) < 0) {
-                throw new IllegalArgumentException("the amount cannot be negative");
-            }
             BigDecimal sourceBalance = getTokensBalance(initiator);
             BigDecimal targetTokensBalance = getTokensBalance(to);
             if (sourceBalance.compareTo(decimalAmount) < 0) {
@@ -1076,12 +986,9 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
         contractIsNotFrozen();
 
         if (!from.equals(to)) {
-            BigDecimal decimalAmount = toBigDecimal(amount);
-            if(decimalAmount.compareTo(ZERO) < 0) {
-                throw new IllegalArgumentException("the amount cannot be negative");
-            }
             BigDecimal sourceBalance = getTokensBalance(from);
             BigDecimal targetTokensBalance = getTokensBalance(to);
+            BigDecimal decimalAmount = toBigDecimal(amount);
             if (sourceBalance.compareTo(decimalAmount) < 0)
                 throw new RuntimeException("unable transfer tokens! The balance of " + from + " less then " + amount);
 
@@ -1119,19 +1026,22 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
     public boolean burn(String amount) {
         contractIsNotFrozen();
         BigDecimal decimalAmount = toBigDecimal(amount);
-        if (!initiator.equals(owner))
-            throw new RuntimeException("can not burn tokens! The wallet " + initiator + " is not owner");
-        if (totalCoins.compareTo(decimalAmount) < 0) totalCoins = ZERO.setScale(decimal, ROUND_DOWN);
-        else totalCoins = totalCoins.subtract(decimalAmount);
+        BigDecimal sourceBalance = getTokensBalance(initiator);
+        checkNegative(decimalAmount);
+        if (sourceBalance.compareTo(decimalAmount) < 0) {
+            throw new RuntimeException(String.format("the wallet %s doesn't have enough tokens to burn", initiator));
+        }
+        totalCoins = totalCoins.subtract(decimalAmount);
+        balances.put(initiator, sourceBalance.subtract(decimalAmount));
         return true;
     }
 
-    public void payable(String amount, String currency) {
+    public String payable(BigDecimal amount, byte[] userData) {
         contractIsNotFrozen();
-        BigDecimal decimalAmount = toBigDecimal(amount);
-        if (totalCoins.compareTo(decimalAmount) < 0) throw new RuntimeException("not enough tokes to buy");
-        balances.put(initiator, Optional.ofNullable(balances.get(initiator)).orElse(ZERO).add(decimalAmount));
-        totalCoins = totalCoins.subtract(decimalAmount);
+        if (freeCoins.compareTo(amount) < 0) throw new RuntimeException("not enough tokes to buy");
+        balances.put(initiator, Optional.ofNullable(balances.get(initiator)).orElse(ZERO).add(amount));
+        freeCoins = freeCoins.subtract(amount);
+        return "Success.";
     }
 
     private void contractIsNotFrozen() {
@@ -1148,6 +1058,12 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
             return  ZERO.setScale(decimal, ROUND_DOWN);
         });
     }
+
+    private void checkNegative(BigDecimal value) {
+        if(value.compareTo(ZERO) < 0) {
+            throw new IllegalArgumentException("the amount cannot be negative");
+        }
+    }
 }`;
 
     let el = document.getElementsByClassName("w-content")[0];
@@ -1159,6 +1075,12 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
     h2.classList = "title";
     h2.innerText = Text.CreateToken_h2_1;
     el.appendChild(h2);
+
+    let Fee = document.createElement("input");
+    Fee.placeholder = "Fee";
+    Fee.id = "Fee";
+    Fee.classList = "main-input";
+    el.appendChild(Fee);
 
     let p = document.createElement("p");
     p.className = "mb-20";
@@ -1210,56 +1132,32 @@ public class Token${Symbol} extends SmartContract implements BasicStandard {
     });
 }
 
-function RenderExecuterSmartContract(Call) {
-
+function RenderExecuterSmartContract(Call)
+{
     let Text = Resourse();
 
     let Cont = document.getElementsByClassName("w-content")[0];
-    Cont.innerHTML = "";
-
-    let h1 = document.createElement("h1");
-    h1.className = "title 50";
-    h1.innerText = Text.RenderSmartContract_h1_1;
-    Cont.appendChild(h1);
-
-    let button = document.createElement("a");
-    button.className = "link mb-10";
-    button.innerText = Text.RenderSmartContract_button_1;
-    button.onclick = RanderPayment;
-    Cont.appendChild(button);
-
-
-    let div = document.createElement("div");
-    div.className = "lblock";
-    Cont.appendChild(div);
-
-    let input = document.createElement("input");
-    input.className = "main-input mb-10";
-    input.placeholder = Text.RenderSmartContract_placeholder_1;
-    input.onchange = SmartContractMetod;
-    input.id = "PublicSmart";
-    div.appendChild(input);
-
-    let p = document.createElement("div");
-    p.className = "smart__p no-margin";
-    div.appendChild(p);
-
-    let a = document.createElement("a");
-    a.className = "bold-link bttn lupop";
-    a.onclick = SmartContractMetod;
-    p.appendChild(a);
-
-    div = document.createElement("div");
-    div.id = "Smart";
-    Cont.appendChild(div);
-
+    Cont.innerHTML = 
+        `<h1 class="title 50">${Text.RenderSmartContract_h1_1}</h1>
+        <a class="link mb-10">Back</a>
+        <div class="lblock">
+            <input class="main-input mb-10" placeholder="Search contract" id="PublicSmart">
+            <div class="smart__p no-margin">
+                <a class="bold-link bttn lupop"></a>
+            </div>
+        </div>
+        <div id="Smart"></div>`;
+    document.querySelectorAll(".w-content .lblock .bold-link.bttn.lupop")[0].onclick = SmartContractMetod;
+    document.querySelectorAll(".w-content .link.mb-10")[0].onclick = RanderPayment;
+    document.getElementById("PublicSmart").onchange = SmartContractMetod;
 }
 
 function SmartContractMetod()
 {
     let PublicSmart = document.getElementById("PublicSmart").value;
 
-    if (PublicSmart === "") {
+    if (PublicSmart === "")
+    {
         document.getElementById("Smart").innerHTML = "";
         return;
     }
@@ -1267,66 +1165,41 @@ function SmartContractMetod()
     let Text = Resourse();
 
     Ajax({
-        Url: `${Url}/Api/SmartContract/${PublicSmart}`,
-        Success: function (r) {
-            console.log(r);
-            if (r.Result === null)
+        Url: `Api/${Url}/Api/SmartContract/${PublicSmart}`,
+        Success: function (res)
+        {
+            if (res.length > 0)
             {
-                alert(r.Message);
-                return;
-            }
+                let div = document.getElementById("Smart"); 
+                let TextHtml =
+                    `<p class="smart__p fontBold font_l_h_2 mb-10">
+                        <input id="FogetNewState" type="checkbox">
+                        Save the result on the blockchain 
+                    </p>
+                    <input class="main-input" id="Fee" placeholder="Fee">
+                    <input class="main-input" id="UsedSmart" placeholder="Enter comma - separated public keys for smart contracts">
+                    <p class="smart__p fontBold font_l_h_2 mb-10">${Text.RenderSmartContract_p_1}</p>
+                    <select class="select mb-10 main-input" id="Method">`;
 
-            res = r.Result;
-            if (res.length > 0) {
-
-                let div = document.getElementById("Smart");
-                div.innerText = "";
-
-                let p = document.createElement("p");
-                p.className = "smart__p fontBold font_l_h_2 mb-10";
-                p.innerText = Text.RenderSmartContract_p_1;
-                div.appendChild(p);
-
-                let select = document.createElement("select");
-                select.className = "select mb-10";
-                select.onchange = ArgSmartMethod;
-                select.id = "Method";
-                div.appendChild(select);
-
-                for (let index in res) {
-                    let option = document.createElement("option");
-                    option.text = res[index].Name;
-                    option.value = JSON.stringify(res[index].Arguments);
-                    option.setAttribute("ReType", res[index].ReturnType);
-                    select.appendChild(option);
+                for (let index in res)
+                {
+                    TextHtml += `<option value="${JSON.stringify(res[index].Arguments).replaceAll('"', "'")}" retype="${res[index].ReturnType}">${res[index].Name}</option>`;
                 }
 
-                let div2 = document.createElement("div");
-                div2.className = "wrap_fields";
-                div.appendChild(div2);
-
-                div2 = document.createElement("div");
-                div2.className = "center_a p_bot20";
-                div.appendChild(div2);
-
-                let a = document.createElement("a");
-                a.className = "link get_consult";
-                a.innerText = Text.RenderSmartContract_button_2;
-                //div2.appendChild(a);
-
-                div2 = document.createElement("div");
-                div2.className = "row around mb-50";
-                div.appendChild(div2);
-
-                a = document.createElement("a");
-                a.className = "bold-link bttn";
-                a.innerText = Text.RenderSmartContract_button_3;
-                a.onclick = Execute;
-                div2.appendChild(a);
-
-
+                TextHtml += 
+                    `</select>
+                    <div class="wrap_fields"></div>
+                    <div class="center_a p_bot20"></div>
+                    <div class="row around mb-50">
+	                    <a class="bold-link bttn">${Text.RenderSmartContract_button_3}</a>
+                    </div>`;
+                div.innerHTML = TextHtml;
+                document.querySelectorAll("#Smart .row.around.mb-50 .bold-link.bttn")[0].onclick = Execute;
+                document.getElementById("Method").onchange = ArgSmartMethod;
                 document.getElementById("Method").onchange();
-            } else {
+            } 
+            else
+            {
                 alert("Smart contract will not find or smart contrac don't have methods");
             }
         }
@@ -1340,11 +1213,11 @@ function ArgSmartMethod() {
         el.innerHTML = "";
 
         let select = document.getElementById("Method");
-        let Value = select.options[select.selectedIndex].value;
-        Value = JSON.parse(Value);
-
+        let Value = JSON.parse(select.options[select.selectedIndex].value.replaceAll("'", '"'));
 
         for (let index in Value) {
+
+
             let p = document.createElement("p");
             p.innerText = Value[index].Name;
             el.appendChild(p);
@@ -1376,75 +1249,60 @@ function Execute() {
                 case "int":
                     param.push({ Key: "INT", Value: paramEl[index].value });
                     break;
+                case "bool":
+                    param.push({ Key: "BOOL", Value: paramEl[index].value });
+                    break;
             }
         }
     }
 
+    let fee = document.getElementById("Fee");
+    fee = fee === null ? "0.01" : fee.value === "" ? "0.01" : fee.value;
+    let fns = document.getElementById("FogetNewState");
+    fns = fns === null ? true : !fns.checked;
+    let UserdSmart = document.getElementById("UsedSmart");
+    UserdSmart = UserdSmart === null ? null : UserdSmart.value.split(",");
+
     Ajax({
-        Url: `${Url}/api/CreatePervStr`,
+        Url: `Api/${Url}/api/CreatePervStr`,
         Method: "POST",
         Data: JSON.stringify({
             Amount: "0,0",
-            Fee: "0.9",
+            Fee: fee,
             Source: Base58.encode(Public),
             Target: KeySmart,
             Smart: {
                 Method: method,
                 Params: param,
-                ForgetNewState: false
+                ForgetNewState: fns,
+                UsedContract: UserdSmart
             }
         }),
         Success: function (Response) {
-            if (Response.Result === null) {
-                alert(Response.Message);
-                return;
-            }
 
-            Response.Result.Priv = ConvertSign(Response.Result.Priv);
+            Response.Priv = ConvertSign(Response.Priv);
 
             Ajax({
-                Url: `${Url}/api/Transaction`,
+                Url: `Api/${Url}/api/Transaction`,
                 Method: "POST",
-                Data: JSON.stringify(Response.Result),
+                Data: JSON.stringify(Response),
                 Success: function (res) {
-                    if (res.Result === false) {
-                        alert(res.Message);
-                        return;
+                    let t = document.getElementById("Method").options[document.getElementById("Method").selectedIndex].attributes["retype"].value;
+                    switch (t)
+                    {
+                        case "java.lang.String":
+                            alert(res.Smart_contract_result.V_string);
+                            break;
+                        case "double":
+                            alert(res.Smart_contract_result.V_double);
+                            break;
+                        case "int":
+                            alert(res.Smart_contract_result.V_int);
+                            break;
+                        case "bool":
+                            alert(res.Smart_contract_result.V_boolean);
+                            break;
                     }
-                    //var mess = "message: " + res.status.message.split(" ")[0];
-                    //if (res.smart_contract_result !== null) {
-                    //    if (res.smart_contract_result.v_bool !== null) {
-                    //        mess += "\n\rbool: " + res.smart_contract_result.v_bool;
-                    //    }
-                    //    if (res.smart_contract_result.v_double !== null) {
-                    //        mess += "\n\rdouble: " + res.smart_contract_result.v_double;
-                    //    }
-                    //    if (res.smart_contract_result.v_i8 !== null) {
-                    //        mess += "\n\ri8: " + res.smart_contract_result.v_i8;
-                    //    }
-                    //    if (res.smart_contract_result.v_i16 !== null) {
-                    //        mess += "\n\ri16: " + res.smart_contract_result.v_i16;
-                    //    }
-                    //    if (res.smart_contract_result.v_i32 !== null) {
-                    //        mess += "\n\ri32: " + res.smart_contract_result.v_i32;
-                    //    }
-                    //    if (res.smart_contract_result.v_i64 !== null) {
-                    //        mess += "\n\ri64: " + res.smart_contract_result.v_i64;
-                    //    }
-                    //    if (res.smart_contract_result.v_list !== null) {
-                    //        mess += "\n\rlist: " + res.smart_contract_result.v_list;
-                    //    }
-                    //    if (res.smart_contract_result.v_map !== null) {
-                    //        mess += "\n\rmap: " + res.smart_contract_result.v_map;
-                    //    }
-                    //    if (res.smart_contract_result.v_set !== null) {
-                    //        mess += "\n\rset: " + res.smart_contract_result.v_set;
-                    //    }
-                    //    if (res.smart_contract_result.v_string !== null) {
-                    //        mess += "\n\rstring: " + res.smart_contract_result.v_string;
-                    //    }
-                    //}
-                    //alert(mess);
                 }
             });
 
@@ -1552,6 +1410,38 @@ function RanderPayment(Obj)
     p.id = "ErrorFee";
     div2.appendChild(p);
 
+    label = document.createElement("label");
+    label.className = "d-block mb-10";
+    label.innerText = "User data (optional field)";
+    div2.appendChild(label);
+
+    input = document.createElement("input");
+    input.className = "main-input";
+    input.id = "UserData";
+    input.placeholder = "Enter you data";
+    div2.appendChild(input);
+
+    p = document.createElement("p");
+    p.className = "textColorRed mb-50";
+    p.id = "ErrorUserData";
+    div2.appendChild(p);
+
+    label = document.createElement("label");
+    label.className = "d-block mb-10";
+    label.innerText = "Used smart contracts (optional field)";
+    div2.appendChild(label);
+
+    input = document.createElement("input");
+    input.className = "main-input";
+    input.id = "UsedContracts";
+    input.placeholder = "Enter comma - separated public keys for smart contracts";
+    div2.appendChild(input);
+
+    p = document.createElement("p");
+    p.className = "textColorRed mb-50";
+    p.id = "ErrorUserData";
+    div2.appendChild(p);
+
     a = document.createElement("a");
     a.className = "bold-link bttn";
     a.innerText = Text.Acc_button_1;
@@ -1628,63 +1518,84 @@ function PreparingTransaction()
     let ErrorAddress = document.getElementById("ErrorAddress");
     let ErrorAmount = document.getElementById("ErrorAmount");
     let ErrorFee = document.getElementById("ErrorFee");
+    let ErrorUserData = document.getElementById("UserData");
+    let ErrorUsedContracts = document.getElementById("UsedContracts");
     
     ErrorAddress.innerText = "";
     ErrorAmount.innerText = "";
     ErrorFee.innerText = "";
+    ErrorUserData.innerText = "";
+    ErrorUsedContracts.innerText = "";
 
     let PublicTo = document.getElementById("Address").value;
     let Amount = document.getElementById("Amount").value;
     let Fee = document.getElementById("Fee").value;
+    let UserData = document.getElementById("UserData").value;
+    let UsedContracts = document.getElementById("UsedContracts").value;
 
     let Text = Resourse();
 
-    if (PublicTo === "") {
+    if (PublicTo === "")
+    {
         ErrorAddress.innerText = Text.Acc_input_1_error;
         return;
     }
-    if (Amount === "") {
+    if (Amount === "")
+    {
         ErrorAmount.innerText = Text.Acc_input_2_error;
         return;
     }
-    if (Fee === "") {
+    if (Fee === "")
+    {
         ErrorFee.innerText = Text.Acc_input_3_error;
         return;
     }
-    
+
+    if (UsedContracts === "")
+    {
+        UsedContracts = undefined;
+    }
+    else
+    {
+        UsedContracts = UsedContracts.split(",");
+        for (let i in UsedContracts)
+        {
+            while (UsedContracts[i].match(/\s/, '') !== null)
+            { 
+                UsedContracts[i] = UsedContracts[i].replace(/\s/, '');
+            }
+        }
+    }
+
     let CurrencyEL = document.getElementById("Currency");
     let Currency = document.getElementById("Currency").value;
     let Code = CurrencyEL.options[CurrencyEL.selectedIndex].innerText.split("(")[1].split(")")[0];
 
     if (Currency === "CS") {
         Ajax({
-            Url: `${Url}/api/CreatePervStr`,
+            Url: `Api/${Url}/api/CreatePervStr`,
             Method: "POST",
             Data: JSON.stringify({
                 Amount: Amount,
                 Fee: document.getElementById("Fee").value,
                 Source: Base58.encode(Public),
-                Target: PublicTo
+                Target: PublicTo,
+                UserData: UserData,
+                UsedContracts: UsedContracts
             }),
             Success: function (Response) {
-                if (Response.Result === null) {
-                    alert(Response.Message);
-                    return;
-                }
 
-                console.log(Response.Result);
-
-                if (Response.Result.Target !== PublicTo) {
+                if (Response.Target !== PublicTo) {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                if (Response.Result.Amount !== Amount.replace(/\./, ',')) {
+                if (Response.Amount !== Amount.replace(/\,/, '.')) {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                ChecPrice(Response.Result, {
+                ChecPrice(Response, {
                     Fee: Fee,
                     PublicTo: PublicTo,
                     Amount: Amount,
@@ -1694,7 +1605,7 @@ function PreparingTransaction()
         });
     } else {
         Ajax({
-            Url: `${Url}/api/CreatePervStr`,
+            Url: `Api/${Url}/api/CreatePervStr`,
             Method: "POST",
             Data: JSON.stringify({
                 Amount: "0,0",
@@ -1711,32 +1622,28 @@ function PreparingTransaction()
                 }
             }),
             Success: function (Response) {
-                if (Response.Result === null) {
-                    alert(Response.Message);
-                    return;
-                }
 
-                if (Response.Result.Target !== Currency) {
+                if (Response.Target !== Currency) {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                if (Response.Result.Amount !== "0,0") {
+                if (Response.Amount !== "0,0") {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                if (Response.Result.Smart.Params[0].Value !== PublicTo) {
+                if (Response.Smart.Params[0].Value !== PublicTo) {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                if (Response.Result.Smart.Params[1].Value !== Amount.replace(/,/, '.')) {
+                if (Response.Smart.Params[1].Value !== Amount.replace(/,/, '.')) {
                     alert("Transaction was denied due to suspicious traffic");
                     return;
                 }
 
-                ChecPrice(Response.Result, {
+                ChecPrice(Response, {
                     Fee: Fee,
                     PublicTo: PublicTo,
                     Amount: Amount,
@@ -1782,12 +1689,11 @@ function RenderPreparingTransaction(Trans, Obj) {
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
     p.innerText = Text.ConfirmTrans_p_2;
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
+    p.className = "mb-30";
     div.appendChild(p);
 
     let span = document.createElement("span");
@@ -1796,12 +1702,11 @@ function RenderPreparingTransaction(Trans, Obj) {
     p.appendChild(span);
 
     p = document.createElement("div");
-    p.className = "mb-20";
     p.innerText = Text.ConfirmTrans_p_3;
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
+    p.className = "mb-30";
     div.appendChild(p);
 
     span = document.createElement("span");
@@ -1810,12 +1715,11 @@ function RenderPreparingTransaction(Trans, Obj) {
     p.appendChild(span);
 
     p = document.createElement("div");
-    p.className = "mb-20";
     p.innerText = Text.ConfirmTrans_p_4;
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
+    p.className = "mb-30";
     div.appendChild(p);
     
     span = document.createElement("span");
@@ -1824,12 +1728,11 @@ function RenderPreparingTransaction(Trans, Obj) {
     p.appendChild(span);
 
     p = document.createElement("div");
-    p.className = "mb-20";
     p.innerText = "Transaction";
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
+    p.className = "mb-30";
     div.appendChild(p);
 
     let TextTrans = `{&nbsp;Amount: "${Trans.Amount}",
@@ -1858,12 +1761,11 @@ function RenderPreparingTransaction(Trans, Obj) {
     p.appendChild(span);
 
     p = document.createElement("div");
-    p.className = "mb-20";
     p.innerText = "Signature";
     div.appendChild(p);
 
     p = document.createElement("div");
-    p.className = "mb-20";
+    p.className = "mb-30";
     div.appendChild(p);
 
     span = document.createElement("span");
@@ -1900,7 +1802,7 @@ function ResultPayment(Trans, Obj) {
     Trans.Priv = ConvertSign(Trans.Priv);
 
     Ajax({
-        Url: `${Url}/api/Transaction`,
+        Url: `Api/${Url}/api/Transaction`,
         Method: "POST",
         Data: JSON.stringify(Trans),
         Success: function (res) {
@@ -2006,20 +1908,18 @@ function UpdateBalance() {
     }
 
     Ajax({
-        Url: `${Url}/api/Balance/${Base58.encode(Public)}`,
+        Url: `Api/${Url}/api/Balance/${Base58.encode(Public)}`,
         Success: function (r) {
-            if (r.Result === null) {
-                alert(r.Message);
-                return;
-            }
-
-            let Storag = {
-                CS: { balance: r.Result.CS, Text: "Credits (CS)" }
-            };
-
-            for (var i in r.Result.Tokens) {
-                val = r.Result.Tokens[i];
-                Storag[val.Token] = { balance: val.Balance, Text: val.Code };
+            let Storag = {};
+            for (var i in r) {
+                if (r[i].publicKey === null)
+                {
+                    Storag["CS"] = { balance: r[i].balance, Text: "Credits (CS)" };
+                }
+                else
+                { 
+                    Storag[r[i].publicKey] = { balance: r[i].balance, Text: r[i].code };
+                }
             }
             RenderBalance(Storag);
         }
@@ -2325,12 +2225,15 @@ function DeployToken() {
             let smart = ace.edit("SmartEditor");
             smart = smart.getValue();
 
+            let fee = document.getElementById("Fee");
+            fee = fee === null ? "0.01" : fee.value === "" ? "0.01" : fee.value;
+
             Ajax({
-                Url: `${Url}/api/CreatePervStr`,
+                Url: `Api/${Url}/api/CreatePervStr`,
                 Method: "POST",
                 Data: JSON.stringify({
-                    Amount: "0,0",
-                    Fee: "1.0",
+                    Amount: "0.0",
+                    Fee: fee,
                     Source: Base58.encode(Public),
                     Smart: {
                         ForgetNewState: false,
@@ -2338,24 +2241,15 @@ function DeployToken() {
                     }
                 }),
                 Success: function (Response) {
-                    if (Response.Result === null) {
-                        alert(Response.Message);
-                        ChecDeployToken = true;
-                        return;
-                    }
 
-                    Response.Result.Priv = ConvertSign(Response.Result.Priv);
+                    Response.Priv = ConvertSign(Response.Priv);
 
                     Ajax({
-                        Url: `${Url}/api/Transaction`,
+                        Url: `Api/${Url}/api/Transaction`,
                         Method: "POST",
-                        Data: JSON.stringify(Response.Result),
+                        Data: JSON.stringify(Response),
                         Success: function (res) {
                             ChecDeployToken = true;
-                            if (res.Result === null) {
-                                alert(res.Message);
-                                return;
-                            }
                             RanderPayment();
                         }
                     });
@@ -2454,17 +2348,6 @@ function PopapRegister() {
     document.getElementsByTagName("body")[0].appendChild(cont);
 }
 
-function Test(Pub) {
-    var ar = ["83.83.178.51", "94.255.128.184","161.202.176.226", "161.202.176.227", "169.38.89.210", "169.38.89.211", "169.38.89.213", "", "169.38.89.214", "169.38.89.215", "178.43.75.145", "24.129.100.216", "169.38.89.212", "89.143.33.76"]
-    for (var i in ar) {
-        Url = ar[i];
-        SignCS.Connect().WalletTransactionsCountGet(Pub, function (r) {
-            console.log(ar[i]);
-            console.log(r);
-        });
-    }
-}
-
 function Ajax(Obj) {
     let DefObj = {
         Url: "",
@@ -2489,20 +2372,27 @@ function Ajax(Obj) {
 
     Loader();
 
-    if (Obj.Data === null)
+    try
     {
-        req.send();
-    }
-    else
-    {
-        req.send(Obj.Data);
-    }
+        if (Obj.Data === null) {
+            req.send();
+        }
+        else {
+            req.send(Obj.Data);
+        }
+    } catch (ex) { console.log(ex); }
+
     req.onreadystatechange = function ()
     {
-        if (req.readyState === 4)
-        {
+        if (req.readyState === 4) {
             CloseLoader();
-            Obj.Success(JSON.parse(req.responseText));
+            if (req.status === 200) {
+                Obj.Success(JSON.parse(req.responseText));
+            }
+            else
+            {
+                alert(JSON.parse(req.responseText));
+            }
         }
     };
 }

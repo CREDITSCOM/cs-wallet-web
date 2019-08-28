@@ -1,0 +1,114 @@
+﻿@{
+    string currentLang;
+    if (ViewContext.RouteData.Values["lang"] != null)
+    {
+        currentLang = ViewContext.RouteData.Values["lang"].ToString().ToLowerInvariant();
+    }
+    else
+    {
+        currentLang = "en";
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="icon" href="~/Content/image/favicon.png">
+    <link rel="stylesheet" href="~/Content/css/Style.css?xcvbsetbhz" />
+
+    @Scripts.Render("~/Content/js/Nacl/nacl.min.js")
+
+    @Scripts.Render($"~/Content/js/Resourse/Resourse.{currentLang}.js?dfgnbdtrf")
+
+    @Scripts.Render("~/Content/js/Signature_4_0.js?sdgxvbsdfbbr")
+
+
+    <script src="~/Content/js/JAVA/ace.js"></script>
+    <script src="~/Content/js/JAVA/mode-java.js"></script>
+    <script src="~/Content/js/JAVA/theme-twilight.js"></script>
+
+    <script src="~/Content/js/CreditsWork.js"></script>
+    <script src="~/Content/js/Wallet.js?hyr"></script>
+
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="content top-bar__inner">
+                <div class="top-bar__el">
+                    <select class="select" id="Net" onchange="SetUrl(this);">
+                        <option value="testnet-r4_2" mon="testnet-r4_2">Release 4.2</option>
+                    </select>
+                </div>
+                <div class="top-bar__el">
+                    <a onclick="window.open('https://developers.credits.com/en/Articles/a_How_to_use_Web_Wallet')" class="el__top-menu-el">How to use</a>
+                    <a onclick="window.open('https://developers.credits.com/en/')" class="el__top-menu-el">Developers</a>
+                </div>
+            </div>
+        </div>
+        <div class="content inner-wrap">
+            <div onclick="document.location.href = '/'" class="logo-wrap" style="cursor:pointer">
+                <a class="logo">
+                    <img src="~/Content/image/logo.png?jgf" alt="Logo Credits Wallet">
+                </a>
+            </div>
+            <div class="header-wrap">
+                <nav class="menu">
+                    <div class="wrap_menu">
+                        <div class="menu_item" onclick="document.location.href = '/'">Home</div>
+                        <div class="menu_item" onclick="window.open('https://developers.credits.com/en/Articles/a_Web_Wallet')">About</div>
+                        <div class="menu_item" onclick="window.open('https://github.com/CREDITSCOM/cs-wallet-web')">Github</div>
+                        <div class="menu_item" onclick="window.open('https://monitor.credits.com/'+ Monitor)">Monitor</div>
+                        <div class="menu_item" id="TopMenuRegister" onclick="RenderKey()">Register</div>
+                        <div class="menu_item" id="TopMenuLogin" onclick="SignIn()">Login</div>
+                        <div class="menu_item" id="TopMenuLogout" style="display:none;" onclick="document.location.href = '/'">Logout</div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="wrap">
+        @RenderBody()
+    </div>
+    <div id="animationCookie" class="displayFlex" style="display: block;">
+        <div id="animationContentCookie">
+            <div class="textCookie">
+                This site uses cookies in order to improve your user experience and to provide content tailored specifically to your interests. Detailed information on the use of cookies on this website is provided in our <a href="/en/Home/Privacy" class="newbutnc CookieBarClose">Privacy Policy</a>. By using this website, you consent to the use of cookies.
+                You can always deactivate cookies in commonly used browsers.
+            </div>
+            <div class="knopkiCookie">
+                <a onclick="document.getElementById('animationCookie').remove()" class="btn newbutnc CookieBarClose">Ok</a>
+            </div>
+        </div>
+    </div>
+    <footer class="wrap-footer">
+        <div class="wrap-footer-row mx-1400">
+            <div class="footer-col-1 colored">
+                <h2>About</h2>
+                <ul>
+                    <li><a class="footer-link" href="https://credits.com" target="_blank">Credits.com</a></li>
+                    <li><a class="footer-link" href="https://monitor.credits.com" target="_blank">Monitor.credits.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-col-2 colored footer-col-hiddeble">
+            </div>
+            <div class="footer-col-3 colored footer-col-hiddeble">
+            </div>
+            <div class="footer-col-4">
+            </div>
+        </div>
+        <div class="wrap-footer-row copyback">
+            <div class="footer-copyright">
+                <div class="footer-copy">
+                    <span class="bottom-footer-text">© 2016-2018   <a href="https://credits.com" target="_blank" style="color:white">Credits.com</a>   All Rights Reserved.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

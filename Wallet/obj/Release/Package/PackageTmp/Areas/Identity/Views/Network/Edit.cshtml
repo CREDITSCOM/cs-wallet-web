@@ -1,0 +1,15 @@
+﻿@model Db.DbTable.Networks
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@Html.ValidationMessage("")
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.IdStr)
+    @Html.TextBoxFor(m => m.Name, new { placeholder = "Name" })
+    @Html.TextBoxFor(m => m.Title, new { placeholder = "Title" })
+    @Html.TextBoxFor(m => m.MonitorLink, new { placeholder = "MonitorLink" })
+    <button>Edit</button>
+}

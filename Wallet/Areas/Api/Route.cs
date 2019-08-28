@@ -25,15 +25,17 @@ namespace Wallet.Areas.Api
 
             routes.MapRoute(
                 name: "ApiLang",
-                url: "{lang}/{network}/{Controller}/{action}/{id}",
-                constraints: constaints,
-                defaults: new {lang ="en", controller = "Api", id = UrlParameter.Optional, network = "main" }
-            );
-            routes.MapRoute(
-                name: "Api",
-                url: "{network}/{Controller}/{action}/{id}",
+                url: "Api/{lang}/{network}/{Controller}/{action}/{id}",
                 constraints: constaints,
                 defaults: new { lang = "en", controller = "Api", id = UrlParameter.Optional, network = "main" }
+            );
+
+            routes.MapRoute(
+                name: "Api",
+                url: "Api/{network}/{Controller}/{action}/{id}",
+                constraints: constaints,
+                defaults: new { lang = "en", controller = "Api", id = UrlParameter.Optional, network = "main" },
+                namespaces: new string[] { "Wallet.Areas.Api" }
             );
         }
     }

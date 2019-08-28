@@ -1,0 +1,12 @@
+﻿@using Db.DbTable
+@{
+    ViewBag.Title = "All";
+    var Ips = ViewBag.Ips as List<IpNet>;
+}
+
+<h2>All</h2>
+<a href="~/Identity/Ip/Add">Add</a>
+@foreach (IpNet i in Ips)
+{
+    <div><a href="~/Identity/Ip/Edit/@i.IdStr">@i.Ip</a> @i.NetWork</div>
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Credtis_Api_Connect</RootNamespace>
+    <Authors>Credits</Authors>
+    <Company>Credits</Company>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>CredtisApiConnect</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Base58Check" Version="0.2.0" />
+    <PackageReference Include="blake2s-net" Version="0.1.0" />
+    <PackageReference Include="Rebex.Elliptic.Ed25519" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Thrift45">
+      <HintPath>Thrift\Thrift45.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

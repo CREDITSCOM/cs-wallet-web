@@ -6,11 +6,9 @@ using Wallet.TransferModel;
 
 namespace Wallet.Models
 {
-    public interface IApiWork : IDisposable
+    public interface IIApiWork : IDisposable
     {
         ApiResult<BalanceCS> Balance(string Public);
-        ApiResult<PervStrModel> CreatePervStr(TransactionCreateModel<string> model);
-        ApiResult<object> UnsafeTransaction(TransactionCreateModel<string> model);
         ApiResult<bool> Send(PervStrModel model);
         byte[] BitsToBytes(string Bits);
         int BitsToNumb(string Bits);

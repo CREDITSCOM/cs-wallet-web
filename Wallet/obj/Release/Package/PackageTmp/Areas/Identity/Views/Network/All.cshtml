@@ -1,0 +1,13 @@
+﻿@using Db.DbTable;
+@{
+    ViewBag.Title = "All";
+    List<Networks> nets = ViewBag.Networks as List<Networks>;
+}
+
+<h2>All</h2>
+@ViewBag.Error
+<a href="~/Identity/Network/Add">Add</a>
+@foreach (Networks i in nets)
+{
+<div><a href="~/Identity/en/Network/Edit/@i.IdStr">@i.Name</a></div>
+}

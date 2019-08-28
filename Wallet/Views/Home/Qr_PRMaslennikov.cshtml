@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Qr.cshtml";
+}
+
+
+<div class="bg-block text-center">
+    <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        Private: @ViewBag.Pv
+        <br />
+        <br />
+        Public: @ViewBag.Pb
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+    <div>
+        <button onclick="DWK">Download Keys</button>
+    </div>
+</div>
+<script>
+    function DWK()
+    {
+        var str = {
+            key: {
+                public: '@ViewBag.Pb',
+                private: '@ViewBag.Pv'
+            }
+        };
+
+        DownloadFile("key.json", JSON.stringify(str));
+    }
+</script>

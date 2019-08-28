@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -170,9 +170,6 @@ a.bold-link.bttn.lupop {
     display: none;
 }
 
-.header .logo-wrap {
-}
-
 .row.content.content-inner {
     padding-top: 125px;
     font-size: 14px;
@@ -182,13 +179,64 @@ a.bold-link.bttn.lupop {
 
 .content.inner-wrap {
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 15px;
     height: 60px;
     display: flex;
     justify-content: space-between;
     padding-right: 15px;
 }
+
+.content .buttonBox {
+    display: flex;
+    align-items: center;
+}
+
+    .content .buttonBox > div:nth-child(1) {
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+        .content .buttonBox > div:nth-child(1) a {
+            color: #13191c;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .content .buttonBox svg {
+        width: 10px;
+        height: 10px;
+        margin: 5px;
+    }
+
+    .content .buttonBox .button-confirm {
+        min-width: 275px;
+        max-width: 100%;
+        min-height: 60px;
+        max-height: 100%;
+        font-size: 16px;
+        font-weight: 700;
+        transition: 0.3s;
+        text-transform: uppercase;
+        text-decoration: none;
+        background-color: #13191c;
+        color: #fff;
+        border-radius: 10px;
+        margin: 0px 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .content .buttonBox .button-confirm:hover {
+            background-color: #fff;
+            color: #13191c;
+            border: solid 1px #13191c;
+        }
 
 .logo-wrap {
     padding: 10px 0;
@@ -382,7 +430,7 @@ table.tokenable th {
 
 .content {
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 25px 0px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -391,7 +439,7 @@ table.tokenable th {
 
 .content_main {
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 16px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -411,6 +459,8 @@ table.tokenable th {
     padding-left: 60px;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 14px;
+    font-weight: 500;
 }
 
     .menu_item:hover {
@@ -465,6 +515,8 @@ input {
 .balance_table {
     table-layout: fixed;
     width: 100%;
+    border-collapse: separate;
+    border: solid 1px #dddddd;
 }
 
     .balance_table tr {
@@ -697,8 +749,19 @@ li, li p {
 
 .w-content {
     flex: 1 1 70%;
-    padding: 0 15px;
+    padding: 20px;
 }
+
+    .w-content .textColorRed {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .w-content span {
+        padding: 5px;
+        font-weight: 500;
+        line-height: normal;
+    }
 
 .d-block {
     display: block;
@@ -708,12 +771,14 @@ li, li p {
     display: block;
     width: 100%;
     padding: 8px;
+    background-color: transparent;
 }
 
 .left-bar {
-    padding-right: 24px;
+    /*padding-right: 24px;*/
     transition: 0.3s;
     flex: 1 1 30%;
+    max-width: 315px;
 }
 
 .top-bar {
@@ -737,7 +802,13 @@ li, li p {
 .top-bar__inner {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 5px 15px;
+    width: 100%;
+}
+
+.top-bar__el {
+    display: flex;
 }
 
 .breaked {
@@ -749,17 +820,29 @@ li, li p {
     text-decoration: none;
     color: #567fbb;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: underline;
 }
+
+    .link img {
+        margin: 0 7.5px;
+    }
 
 .link_grey {
     color: rgb(116, 116, 116);
 }
 
-    .bold-link {
-        text-decoration: none;
-        font-weight: bold;
-        color: #263238;
-    }
+.bold-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #263238;
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
 
 .mb-40 {
     margin-bottom: 40px;
@@ -769,12 +852,99 @@ li, li p {
     margin-bottom: 50px;
 }
 
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.d-flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.langBox {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 30px;
+    border-left: solid 2px #92989b;
+    font-weight: 500;
+}
+
+    .langBox > div {
+        display: flex;
+        align-items: center;
+    }
+
+        .langBox > div:hover .lang {
+            display: flex;
+        }
+
+        .langBox > div > div {
+            position: relative;
+        }
+
+    .langBox img {
+        height: 21px;
+        width: 28px;
+    }
+
+.lang {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    right: -15px;
+    left: -5px;
+    top: 20px;
+    border: solid 1px #4d5254;
+}
+
+    .lang > div {
+        padding: 10px;
+        background-color: #eaeaeb;
+    }
+
+        .lang > div:hover {
+            background-color: #c8c8c8;
+        }
+
+    .lang a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+.arrow-gray {
+    position: relative;
+    width: 15px;
+    height: 5px;
+    color: #92989b;
+}
+
+    .arrow-black:after, .arrow-gray:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    .arrow-gray:after {
+        border-top: 5px solid #4d5254;
+    }
+
 .select {
     display: inline-block;
     position: relative;
     cursor: pointer;
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
 }
 
     .select::after {
@@ -951,6 +1121,12 @@ title {
     max-width: 1000px;
     padding-top: 10px;
     display: block;
+}
+
+.header .select {
+    background-color: #eaeaeb;
+    border-radius: 5px;
+    font-weight: 700;
 }
 
 #FormaPassword #PasswordField_box {
@@ -1499,7 +1675,20 @@ input[type="submit"], button, .btn {
     padding: 15px 15px;
     box-shadow: 1px 3px 2px rgba(0,0,0,0.3);
     margin-top: 20px;
+    margin-bottom: 10px;
 }
+
+    .account_field .left-bar-title {
+        display: flex;
+    }
+
+        .account_field .left-bar-title > div, .account_field .left-bar-title > a {
+            margin-right: 5px;
+        }
+
+        .account_field .left-bar-title > a {
+            cursor: pointer;
+        }
 
 .faq_field {
     padding: 7px 15px 15px;
@@ -1523,6 +1712,10 @@ input[type="submit"], button, .btn {
 
     #SmartEditor * {
         font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+    }
+
+    #SmartEditor span {
+        padding: unset;
     }
 
 #Currency {
@@ -1599,7 +1792,16 @@ input[type="submit"], button, .btn {
 .img-icon-crc {
     width: 18px;
     height: 18px;
-    margin-right: 3px;
+    margin: 5px;
+}
+
+.arrow-top {
+    height: 2px;
+    width: 20px;
+    margin: 5px;
+    position: relative;
+    cursor: pointer;
+    flex: 0 0 10px;
 }
 
 div#BalanceToken {
@@ -1607,44 +1809,49 @@ div#BalanceToken {
     overflow: hidden;
 }
 
-.arrow-top {
-    height: 6px;
-    width: 20px;
-    margin: 6px;
-    position: relative;
-    cursor: pointer;
-    flex: 0 0 20px;
+    div#BalanceToken .arrow-top {
+        width: 10px;
+    }
+
+.button-balanceToken {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    border: solid 1px #dddddd;
+    border-top: transparent;
 }
 
-    .arrow-top:before, .arrow-top:after {
-        content: "";
-        height: 100%;
-        width: 50%;
-        position: absolute;
-        top: 0;
-        background: #567fbb;
-    }
+.arrow-top:before, .arrow-top:after {
+    content: "";
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    background: #000000;
+}
 
-    .arrow-top:before {
-        left: 0;
-        transform: skew(0deg, 25deg);
-    }
+.arrow-top:before {
+    left: 0;
+    transform: skew(0deg, 45deg);
+}
 
-    .arrow-top:after {
-        right: 0;
-        transform: skew(0deg, -25deg);
-    }
+.arrow-top:after {
+    right: 0;
+    transform: skew(0deg, -45deg);
+}
 
 .arrow-row {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .slide-popup {
     display: none;
     border: 1px solid #ccc;
     padding: 5px;
-    border-radius: 7px;
+    /*border-radius: 7px;*/
     background-color: #f9f9f9;
 }
 

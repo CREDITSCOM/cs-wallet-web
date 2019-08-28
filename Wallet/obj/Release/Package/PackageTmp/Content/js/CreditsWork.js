@@ -1,117 +1,282 @@
-﻿var CS_PublicKey;
-var CS_PrivateKey;
+var CS_PublicKey,Mon,CS_PrivateKey,Url,Port;
 
-
-function CS_Button(obj)
-{
-    let DefObj = {
-        src: "https://credits.com/Content/img/main/logo.png",
-        top: "100px",
-        rigth: "100px",
-        width: "150px",
-        height: "40px"
+(function () {
+	
+	let Network = {
+        "CreditsNetwork": { Port: "8081", Url: "161.156.96.26" },
+        "DevsDappsTestnet": { Port: "8081", Url: "161.156.96.22" },
+        "testnet-r4_2": { Port: "8081", Url: "89.111.33.169" }
     };
-
-    if (obj === undefined) {
-        obj = DefObj;
-    }
-    else { 
-        for (let item in DefObj) {
-            if (obj[item] === undefined) {
-                obj[item] = DefObj[item];
-            }
+	
+	function ConvertCharToByte(Str) {
+        let B = new Uint8Array(Str.length);
+        for (let i in Str) {
+            B[i] = Str[i].charCodeAt();
         }
+        return B;
     }
-    let i = document.createElement("img");
-    i.style.position = "absolute";
-    i.src = obj.src;
-    i.style.top = obj.top;
-    i.style.right = obj.rigth;
-    i.style.width = obj.width;
-    i.style.height = obj.height;
-    i.style.cursor = "pointer";
-    i.onclick = CS_openpopap;
+	
+	window.CreditsWork = 
+	{
+			balanceGet: function(Addres,CallBack)
+			{
+				let DefObj = {
+					url: undefined,
+					key: undefined,
+					network: "CreditsNetwork"
+				}
+				
+				let Res = {
+					result: undefined,
+					message: undefined
+				};
+				
+				if(typeof CallBack === "function")
+				{
+					if(typeof Addres === "string")
+					{
+						DefObj.key = Addres;
+						Addres = DefObj;
+					}
+					
+					if(typeof Addres === "object")
+					{
+						for(let i in DefObj)
+						{
+							if(Addres[i] === undefined)
+							{
+								Addres[i] = DefObj[i];
+							}
+							
+						}
+						
+						if(Addres.url === undefined)
+						{
+							Addres.url = `{Network[Addres.network].Url}:{Network[Addres.network].Port}`
+						}
+						SignCS.Connect(Addres.url).WalletBalanceGet(Addres.key, r => {
+							if(r.status.code > 0 && r.status.message != "Not found")
+							{
+								Res.message = r.status.message;
+								CallBack(Res);
+								return;
+							}
+							else
+							{
+								Res.result = [
+									{code:"Credits_CS", balance:r.balance.integral + r.balance.fraction * Math.pow(10,-18)}
+								];
+							}
+							SignCS.Connect(Addres.url).TokenBalancesGet(Addres.key, r => {
+								if(r.status.code > 0 && r.status.message != "Not found")
+								{
+									Res.message = r.status.message;
+									Res.result = undefined;
+									CallBack(Res);
+									return;
+								}
+								else
+								{
+									for(let i in r.balances)
+									{
+										let val = r.balances[i];
+										
+										Res.result.push({code:val.code,balance:val.balance,name:val.name,Key:base58.encode(ConvertCharToByte(val.token))}) 
+									}
+									CallBack(Res);
+								}
+							});
+						});
+					}
+					else
+					{
+						Res.Result = "The first argument must be a string or an object."
+					}
+				}
+				else
+				{
+					Res.message = "The second argument must be a function";
+				}
+				CallBack(Res);
+			},
+			sendTransaction: function(Transaction,callBack)
+			{
+				console.log("sendTransaction");
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof Transaction !== "object")
+				{
+					Res.message = "Transaction is not valid";
+				}
+				else
+				{
+					if(typeof callBack !== "function")
+					{
+						Res.message = "Callback is not a function";
+					}
+					else
+					{
+						SendMess(CS_Extension_Id,{method:"CS_Extension_Transaction",Trans:Transaction},callBack);
+						Res.result = true;
+					}
+				}
+				return Res;
+			},
+			getHistory: function(Obj,callBack)
+			{
+				console.log("getHistory");
+				
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof Obj !== "object")
+				{
+					Res.message = "Obj is not an object";
+				}
+				else
+				{
+					if(typeof callBack !== "function")
+					{
+						Res.message = "Callback is not a function";
+					}
+					else
+					{
+						SendMess(CS_Extension_Id,{method:"CS_Extension_History",Data:Obj},callBack);
+						Res.result = true;
+					}
+				}
+				return Res;
+			},
+			authorization: function(callBack)
+			{
+				console.log("authorization");
+				
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof callBack !== "function")
+				{
+					Res.message = "Callback is not a function";
+				}
+				else
+				{
+					SendMess(CS_Extension_Id,"CS_Extension_Authorization",callBack);
+					Res.result = true;
+				}
+				return Res;
+			},
+			AddWebSite: function(callBack)
+			{
+				console.log("CS_Extension_AddWebsite");
+				
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof callBack !== "function")
+				{
+					Res.message = "Callback is not a function";
+				}
+				else
+				{
+					SendMess(CS_Extension_Id,"CS_Extension_AddWebsite",callBack);
+					Res.result = true;
+				}
+				return Res;
+			},
+			compiledSmartContractCode: function(Code,callBack)
+			{
+				console.log("compiledSmartContractCode");
+				
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof Code !== "string")
+				{
+					Res.message = "Code is not a string";
+				}
+				else
+				{
+					if(typeof callBack !== "function")
+					{
+						Res.message = "Callback is not a function";
+					}
+					else
+					{
+						SendMess(CS_Extension_Id,{method:"CS_Extension_compiledSmartContractCode",code:Code},callBack);
+						Res.result = true;
+					}
+				}
+				return Res;
+			},
+			CurNet: (callBack) => 
+			{
+				console.log("CurNet");
+				
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof callBack !== "function")
+				{
+					Res.message = "Callback is not a function";
+					return Res;
+				}
+				
+				SendMess(CS_Extension_Id,"CS_CurNet",callBack);
+				Res.result = true;
+				return Res;
+			},
+			User: (callBack) =>
+			{
+				console.log("User");
+				let Res = {
+					result: false,
+					message: undefined
+				};
+				
+				if(typeof callBack !== "function")
+				{
+					Res.message = "Callback is not a function";
+					return Res;
+				}
+				
+				SendMess(CS_Extension_Id,"CS_User",callBack);
+				Res.result = true;
+				return Res;
+			}
+	}
+	
+	function SendMess(i,m,c){
+		chrome.runtime.sendMessage(i,m,r => {
+			if (chrome.runtime.lastError) { 
+				r = {message: "Connect ERROR: " + chrome.runtime.lastError.message};
+			} 
+			c(r);
+		});
+	}
+}());
 
-    document.getElementsByTagName("body")[0].appendChild(i);
-}
 
-function CS_openpopap() {
-    let Curtain = document.createElement("div");
-    Curtain.id = "CS_popap";
-    Curtain.style.position = "fixed";
-    Curtain.style.top = "0px";
-    Curtain.style.bottom = "0px";
-    Curtain.style.right = "0px";
-    Curtain.style.left = "0px";
-    Curtain.style.background = "rgba(0,0,0,0.3)";
-    document.getElementsByTagName("body")[0].appendChild(Curtain);
 
-    let Cont = document.createElement("div");
-    Cont.style.padding = "10px";
-    Cont.style.border = "solid black 1px";
-    Cont.style.background = "white";
-    Cont.style.marginTop = "10%";
-    Cont.style.marginLeft = "auto";
-    Cont.style.marginRight = "auto";
-    Cont.style.maxWidth = "300px";
-    Curtain.appendChild(Cont);
 
-    let Pub = document.createElement("input");
-    Pub.placeholder = "Put public key here";
-    Pub.id = "CS_PublicKey";
-    Pub.style.margin = "10px 0";
-    Pub.style.padding = "2px 3px";
-    Pub.style.width = "100%";
-    Cont.appendChild(Pub);
 
-    let Priv = document.createElement("input");
-    Priv.placeholder = "Put private key here";
-    Priv.id = "CS_PrivateKey";
-    Priv.style.margin = "10px 0";
-    Priv.style.padding = "2px 3px";
-    Priv.style.width = "100%";
-    Cont.appendChild(Priv);
 
-    let Button = document.createElement("button");
-    Button.style.margin = "10px 0";
-    Button.style.width = "100%";
-    Button.textContent = "Sign In";
-    Button.onclick = function () {
-        try {
-            CS_PublicKey = Base58.decode(document.getElementById("CS_PublicKey").value);
-        } catch (ex) {
-            console.log("Not valid key");
-            return;
-        }
-        console.log("CS_PublicKey");
-        console.log(CS_PublicKey);
-        try {
-            CS_PrivateKey = Base58.decode(document.getElementById("CS_PrivateKey").value);
-        } catch (ex) {
-            console.log("Not valid key");
-            return;
-        }
-        console.log("CS_PrivateKey");
-        console.log(CS_PrivateKey);
-        CS_closepopap();
-    };
-    Cont.appendChild(Button);
 
-    let Close = document.createElement("button");
-    Close.style.margin = "10px 0";
-    Close.style.width = "100%";
-    Close.textContent = "Close";
-    Close.onclick = CS_closepopap;
-    Cont.appendChild(Close);
-}
 
-function CS_closepopap()
-{
-    let popap = document.getElementById("CS_popap");
-    if (popap !== null) {
-        popap.remove();
-    }
-}
+
+
 
 (function () {
     function CreateTransaction(Obj) {
@@ -123,13 +288,15 @@ function CS_closepopap()
             Amount: "0.0",
             Fee: "0.9",
             SmartContract: undefined,
-            TransactionObj: undefined
+            TransactionObj: undefined,
+            UserData: undefined
         };
 
         let DefSmart = {
             Params: undefined,
             Method: undefined,
-            Сode: undefined,
+            Code: undefined,
+            UsedContracts: undefined,
             NewState: false
         };
 
@@ -259,10 +426,10 @@ function CS_closepopap()
         PerStr = concatTypedArrays(PerStr, NumbToByte(Trans.fee.commission, 2));
         PerStr = concatTypedArrays(PerStr, new Uint8Array([1]));
 
-        if (Obj.SmartContract === undefined) {
+        if (Obj.SmartContract === undefined && Obj.UserData === undefined) {
             PerStr = concatTypedArrays(PerStr, new Uint8Array(1));
         }
-        else {
+        else if (Obj.SmartContract !== undefined) {
             PerStr = concatTypedArrays(PerStr, new Uint8Array([1]));
 
             let UserField = new Uint8Array();
@@ -312,12 +479,37 @@ function CS_closepopap()
                             Trans.smartContract.params.push(new Variant({ v_boolean: val.V }));
                             UserField = concatTypedArrays(UserField, new Uint8Array(1));
                             break;
+						case "DOUBLE":
+							UserField = concatTypedArrays(UserField, new Uint8Array([4, 0, 15]));
+							let Buf = new ArrayBuffer(8);
+							let UB = new Uint8Array(Buf);
+							let N = new Float64Array(Buf);
+							N[0] = val.V;
+							UserField = concatTypedArrays(UserField, UB.reverse());
+							UserField = concatTypedArrays(UserField, new Uint8Array(1));
+                            Trans.smartContract.params.push(new Variant({ v_double: val.V }));
+						break;
                     }
                 }
             }
 
-            UserField = concatTypedArrays(UserField, new Uint8Array([15, 0, 3, 11, 0, 0, 0, 0]));
-
+            UserField = concatTypedArrays(UserField, new Uint8Array([15, 0, 3, 11]));
+            if (Obj.SmartContract.UsedContracts === undefined)
+            {
+                UserField = concatTypedArrays(UserField, new Uint8Array(4));
+            }
+            else
+            {
+                Trans.smartContract.usedContracts = [];
+                UserField = concatTypedArrays(UserField, NumbToByte(Obj.SmartContract.UsedContracts.length, 4).reverse());
+                for (let i in Obj.SmartContract.UsedContracts)
+                { 
+                    UserField = concatTypedArrays(UserField, NumbToByte(Obj.SmartContract.UsedContracts[i].length, 4).reverse());
+                    UserField = concatTypedArrays(UserField, ConvertCharToByte(Obj.SmartContract.UsedContracts[i]));
+                    Trans.smartContract.usedContracts.push(ConvertCharToByte(Obj.SmartContract.UsedContracts[i]));
+                }
+            }
+			
             Trans.smartContract.forgetNewState = Obj.SmartContract.NewState;
             UserField = concatTypedArrays(UserField, new Uint8Array([2, 0, 4, 0]));
             if (Obj.SmartContract.NewState) {
@@ -372,6 +564,15 @@ function CS_closepopap()
             PerStr = concatTypedArrays(PerStr, NumbToByte(UserField.length, 4));
             PerStr = concatTypedArrays(PerStr, UserField);
         }
+        else if (Obj.UserData !== undefined)
+        {
+            let UserField = concatTypedArrays(new Uint8Array([1]), NumbToByte(Obj.UserData.length,4));
+            UserField = concatTypedArrays(UserField, ConvertCharToByte(Obj.UserData));
+            PerStr = concatTypedArrays(PerStr, UserField);
+            Trans.userFields = ConvertCharToByte(Obj.UserData);
+        }
+
+
 
         var ArHex = "0123456789ABCDEF";
         var Hex = "";
@@ -766,15 +967,24 @@ function CS_closepopap()
         return InnerId;
     }
 
-    function Connect() {
-        var transport = new Thrift.Transport("http://" + Url + ":" + Port + "/thrift/service/Api/");
+    function Connect(Url) {
+        var transport = new Thrift.Transport("http://" + Url  + "/thrift/service/Api/");
         var protocol = new Thrift.Protocol(transport);
         return new APIClient(protocol);
     }
+	
+	function CommissionToNumb(c){
+		let sign = c >> 15;
+		let m = c & 0x3FF;
+		let f = (c >> 10) & 0x1F;
+		let v1024 = 1.0 / 1024;
+		return (sign != 0 ? -1 : 1) * m * v1024 * Math.pow(10, f - 18);
+	}
 
     window.SignCS = {
         CreateTransaction: CreateTransaction,
-        Connect: Connect
+        Connect: Connect,
+		FeeToNumber: CommissionToNumb
     };
 }());
 

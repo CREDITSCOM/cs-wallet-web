@@ -2255,18 +2255,18 @@ API_TransactionsStateGet_args.prototype.read = function(input) {
       break;
       case 2:
       if (ftype == Thrift.Type.LIST) {
-        var _size214 = 0;
-        var _rtmp3218;
+        var _size222 = 0;
+        var _rtmp3226;
         this.id = [];
-        var _etype217 = 0;
-        _rtmp3218 = input.readListBegin();
-        _etype217 = _rtmp3218.etype;
-        _size214 = _rtmp3218.size;
-        for (var _i219 = 0; _i219 < _size214; ++_i219)
+        var _etype225 = 0;
+        _rtmp3226 = input.readListBegin();
+        _etype225 = _rtmp3226.etype;
+        _size222 = _rtmp3226.size;
+        for (var _i227 = 0; _i227 < _size222; ++_i227)
         {
-          var elem220 = null;
-          elem220 = input.readI64().value;
-          this.id.push(elem220);
+          var elem228 = null;
+          elem228 = input.readI64().value;
+          this.id.push(elem228);
         }
         input.readListEnd();
       } else {
@@ -2292,12 +2292,12 @@ API_TransactionsStateGet_args.prototype.write = function(output) {
   if (this.id !== null && this.id !== undefined) {
     output.writeFieldBegin('id', Thrift.Type.LIST, 2);
     output.writeListBegin(Thrift.Type.I64, this.id.length);
-    for (var iter221 in this.id)
+    for (var iter229 in this.id)
     {
-      if (this.id.hasOwnProperty(iter221))
+      if (this.id.hasOwnProperty(iter229))
       {
-        iter221 = this.id[iter221];
-        output.writeI64(iter221);
+        iter229 = this.id[iter229];
+        output.writeI64(iter229);
       }
     }
     output.writeListEnd();
@@ -2386,19 +2386,19 @@ API_ContractAllMethodsGet_args.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.LIST) {
-        var _size222 = 0;
-        var _rtmp3226;
+        var _size230 = 0;
+        var _rtmp3234;
         this.byteCodeObjects = [];
-        var _etype225 = 0;
-        _rtmp3226 = input.readListBegin();
-        _etype225 = _rtmp3226.etype;
-        _size222 = _rtmp3226.size;
-        for (var _i227 = 0; _i227 < _size222; ++_i227)
+        var _etype233 = 0;
+        _rtmp3234 = input.readListBegin();
+        _etype233 = _rtmp3234.etype;
+        _size230 = _rtmp3234.size;
+        for (var _i235 = 0; _i235 < _size230; ++_i235)
         {
-          var elem228 = null;
-          elem228 = new ByteCodeObject();
-          elem228.read(input);
-          this.byteCodeObjects.push(elem228);
+          var elem236 = null;
+          elem236 = new ByteCodeObject();
+          elem236.read(input);
+          this.byteCodeObjects.push(elem236);
         }
         input.readListEnd();
       } else {
@@ -2422,12 +2422,12 @@ API_ContractAllMethodsGet_args.prototype.write = function(output) {
   if (this.byteCodeObjects !== null && this.byteCodeObjects !== undefined) {
     output.writeFieldBegin('byteCodeObjects', Thrift.Type.LIST, 1);
     output.writeListBegin(Thrift.Type.STRUCT, this.byteCodeObjects.length);
-    for (var iter229 in this.byteCodeObjects)
+    for (var iter237 in this.byteCodeObjects)
     {
-      if (this.byteCodeObjects.hasOwnProperty(iter229))
+      if (this.byteCodeObjects.hasOwnProperty(iter237))
       {
-        iter229 = this.byteCodeObjects[iter229];
-        iter229.write(output);
+        iter237 = this.byteCodeObjects[iter237];
+        iter237.write(output);
       }
     }
     output.writeListEnd();
@@ -4366,6 +4366,113 @@ API_SyncStateGet_result.prototype.write = function(output) {
   return;
 };
 
+API_ExecuteCountGet_args = function(args) {
+  this.executeMethod = null;
+  if (args) {
+    if (args.executeMethod !== undefined && args.executeMethod !== null) {
+      this.executeMethod = args.executeMethod;
+    }
+  }
+};
+API_ExecuteCountGet_args.prototype = {};
+API_ExecuteCountGet_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.executeMethod = input.readString().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+API_ExecuteCountGet_args.prototype.write = function(output) {
+  output.writeStructBegin('API_ExecuteCountGet_args');
+  if (this.executeMethod !== null && this.executeMethod !== undefined) {
+    output.writeFieldBegin('executeMethod', Thrift.Type.STRING, 1);
+    output.writeString(this.executeMethod);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+API_ExecuteCountGet_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined && args.success !== null) {
+      this.success = new ExecuteCountGetResult(args.success);
+    }
+  }
+};
+API_ExecuteCountGet_result.prototype = {};
+API_ExecuteCountGet_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.success = new ExecuteCountGetResult();
+        this.success.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+API_ExecuteCountGet_result.prototype.write = function(output) {
+  output.writeStructBegin('API_ExecuteCountGet_result');
+  if (this.success !== null && this.success !== undefined) {
+    output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
+    this.success.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 APIClient = function(input, output) {
     this.input = input;
     this.output = (!output) ? input : output;
@@ -6279,4 +6386,55 @@ APIClient.prototype.recv_SyncStateGet = function() {
     return result.success;
   }
   throw 'SyncStateGet failed: unknown result';
+};
+APIClient.prototype.ExecuteCountGet = function(executeMethod, callback) {
+  this.send_ExecuteCountGet(executeMethod, callback); 
+  if (!callback) {
+    return this.recv_ExecuteCountGet();
+  }
+};
+
+APIClient.prototype.send_ExecuteCountGet = function(executeMethod, callback) {
+  this.output.writeMessageBegin('ExecuteCountGet', Thrift.MessageType.CALL, this.seqid);
+  var params = {
+    executeMethod: executeMethod
+  };
+  var args = new API_ExecuteCountGet_args(params);
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  if (callback) {
+    var self = this;
+    this.output.getTransport().flush(true, function() {
+      var result = null;
+      try {
+        result = self.recv_ExecuteCountGet();
+      } catch (e) {
+        result = e;
+      }
+      callback(result);
+    });
+  } else {
+    return this.output.getTransport().flush();
+  }
+};
+
+APIClient.prototype.recv_ExecuteCountGet = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new API_ExecuteCountGet_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'ExecuteCountGet failed: unknown result';
 };

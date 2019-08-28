@@ -59,17 +59,26 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Rebex.Ed25519, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rebex.Elliptic.Ed25519.0.9.3\lib\net40\Rebex.Ed25519.dll</HintPath>
+      <HintPath>..\packages\Rebex.Elliptic.Ed25519.1.0.0\lib\net40\Rebex.Ed25519.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -166,7 +175,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Api\ApiController.cs" />
     <Compile Include="Areas\Api\Route.cs" />
+    <Compile Include="Attribute\ExceptionAttribute.cs" />
     <Compile Include="Attr\Culture.cs" />
     <Compile Include="BcService\ApiWork_4_2.cs" />
     <Compile Include="BcService\Thrift_4_2\Annotation.cs" />
@@ -239,12 +251,12 @@
     <Compile Include="BcService\Thrift_4_2\NodeApi\WalletTransactionsCountGetResult.cs" />
     <Compile Include="BcService\Thrift_4_2\object.cs" />
     <Compile Include="BcService\Thrift_4_2\Variant.cs" />
-    <Compile Include="Areas\Api\ApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiWork.cs" />
+    <Compile Include="Modul\NetworkModul.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferModel\SmartContractInfo.cs" />
   </ItemGroup>
@@ -253,16 +265,24 @@
     <Content Include="Content\css\Style.css" />
     <Content Include="Content\image\bg-bl.jpg" />
     <Content Include="Content\image\favicon.png" />
+    <Content Include="Content\image\Flags\flag.ru.png" />
+    <Content Include="Content\image\icon\copy.png" />
+    <Content Include="Content\image\icon\CreateSmart.png" />
+    <Content Include="Content\image\icon\CreateToken.png" />
     <Content Include="Content\image\icon\icons8-invisible.png" />
     <Content Include="Content\image\icon\icons8-visible.png" />
+    <Content Include="Content\image\icon\monitorDertailed.png" />
+    <Content Include="Content\image\icon\PerformTransaction.png" />
+    <Content Include="Content\image\icon\Qr.png" />
+    <Content Include="Content\image\icon\Reload.png" />
     <Content Include="Content\image\icon\search-ico.png" />
+    <Content Include="Content\image\icon\SmarContract.png" />
     <Content Include="Content\image\index\background.png" />
     <Content Include="Content\image\index\main-01-01.svg" />
     <Content Include="Content\image\index\main-02-01.svg" />
     <Content Include="Content\image\index\main-03-01.svg" />
     <Content Include="Content\image\logo.png" />
     <Content Include="Content\image\main\logo.png" />
-    <Content Include="Content\js\Extension.js" />
     <Content Include="Content\js\JAVA\ace.js" />
     <Content Include="Content\js\JAVA\mode-java.js" />
     <Content Include="Content\js\JAVA\theme-twilight.js" />
@@ -270,7 +290,7 @@
     <Content Include="Content\js\Resourse\Resourse.en.js" />
     <Content Include="Content\js\Resourse\Resourse.es.js" />
     <Content Include="Content\js\Resourse\Resourse.jp.js" />
-    <Content Include="Content\js\Resourse\Resourse.ko.js" />
+    <Content Include="Content\js\Resourse\Resourse.kr.js" />
     <Content Include="Content\js\Resourse\Resourse.ru.js" />
     <Content Include="Content\js\Resourse\Resourse.vi.js" />
     <Content Include="Content\js\Resourse\Resourse.zh.js" />
@@ -310,12 +330,27 @@
     <Content Include="Views\Shared\_Layout_JS.cshtml" />
     <Content Include="Views\Home\DappsNet.cshtml" />
     <Content Include="Views\Shared\_LayoutDapsNet.cshtml" />
+    <Content Include="Views\Home\Qr_PRMaslennikov.cshtml" />
+    <Content Include="Views\Shared\_Layout_Qr.cshtml" />
+    <Content Include="Views\Home\CSW.cshtml" />
+    <Content Include="Views\Shared\_Layout_CSW.cshtml" />
+    <Content Include="Views\Shared\_Layout_Identity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Credtis Api Connect\Credtis Api Connect.csproj">
+      <Project>{81b87c87-8983-4b23-af81-8c56fc09dbdd}</Project>
+      <Name>Credtis Api Connect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Db\Db.csproj">
+      <Project>{4398709c-3b01-4438-802a-9405f91c5ee5}</Project>
+      <Name>Db</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -22,14 +22,16 @@ namespace Wallet
                 name: "DefaultLang",
                 url: "{lang}/{action}/{id}",
                 constraints: constaints,
-                defaults: new { lang = "en", controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { lang = "en", controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "Wallet.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
                 constraints: constaints,
-                defaults: new { lang = "en", controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { lang = "en", controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "Wallet.Controllers" }
             );
         }
     }

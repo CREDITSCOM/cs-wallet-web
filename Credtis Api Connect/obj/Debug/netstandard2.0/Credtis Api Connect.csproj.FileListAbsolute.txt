@@ -1,0 +1,33 @@
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.deps.json
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.deps.json
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\bin\Debug\netstandard2.0\Thrift45.dll
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csprojAssemblyReference.cache
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CoreCompileInputs.cache
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfoInputs.cache
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfo.cs
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CopyComplete
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Администратор\source\repos\APi3\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\bin\Debug\netstandard2.0\Thrift45.dll
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Wallet\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CopyComplete
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.deps.json
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\bin\Debug\netstandard2.0\Credtis Api Connect.pdb
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\bin\Debug\netstandard2.0\Thrift45.dll
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csprojAssemblyReference.cache
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CoreCompileInputs.cache
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfoInputs.cache
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.AssemblyInfo.cs
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.csproj.CopyComplete
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.dll
+C:\Users\Алексей\Desktop\GitWalelt\cs-wallet-web\Credtis Api Connect\obj\Debug\netstandard2.0\Credtis Api Connect.pdb

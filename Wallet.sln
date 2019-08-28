@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "Wallet\Wallet.csproj", "{93ACAD13-BCF0-4D4A-814D-45E3B65C3690}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Db", "Db\Db.csproj", "{4398709C-3B01-4438-802A-9405F91C5EE5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credtis Api Connect", "Credtis Api Connect\Credtis Api Connect.csproj", "{81B87C87-8983-4B23-AF81-8C56FC09DBDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{93ACAD13-BCF0-4D4A-814D-45E3B65C3690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93ACAD13-BCF0-4D4A-814D-45E3B65C3690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93ACAD13-BCF0-4D4A-814D-45E3B65C3690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4398709C-3B01-4438-802A-9405F91C5EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4398709C-3B01-4438-802A-9405F91C5EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4398709C-3B01-4438-802A-9405F91C5EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4398709C-3B01-4438-802A-9405F91C5EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B87C87-8983-4B23-AF81-8C56FC09DBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B87C87-8983-4B23-AF81-8C56FC09DBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B87C87-8983-4B23-AF81-8C56FC09DBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B87C87-8983-4B23-AF81-8C56FC09DBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,6 +16,7 @@
             Params: undefined,
             Method: undefined,
             Сode: undefined,
+            UsedContracts: undefined,
             NewState: false
         };
 
@@ -202,7 +203,25 @@
                 }
             }
 
-            UserField = concatTypedArrays(UserField, new Uint8Array([15, 0, 3, 11, 0, 0, 0, 0]));
+            UserField = concatTypedArrays(UserField, new Uint8Array([15, 0, 3, 11]));
+            if (Obj.SmartContract.UsedContracts === undefined)
+            {
+                UserField = concatTypedArrays(UserField, new Uint8Array(4));
+            }
+            else
+            {
+                Trans.smartContract.usedContracts = [];
+                UserField = concatTypedArrays(UserField, NumbToByte(Obj.SmartContract.UsedContracts.length, 4).reverse());
+                for (let i in Obj.SmartContract.UsedContracts)
+                { 
+                    UserField = concatTypedArrays(UserField, new Uint8Array([11, 0, 17]));
+                    UserField = concatTypedArrays(UserField, NumbToByte(Obj.SmartContract.UsedContracts[i].length, 4).reverse());
+                    UserField = concatTypedArrays(UserField, ConvertCharToByte(Obj.SmartContract.UsedContracts[i]));
+                    Trans.smartContract.usedContracts.push(ConvertCharToByte(Obj.SmartContract.UsedContracts[i]));
+                    UserField = concatTypedArrays(UserField, new Uint8Array(1));
+                }
+            }
+
 
             Trans.smartContract.forgetNewState = Obj.SmartContract.NewState;
             UserField = concatTypedArrays(UserField, new Uint8Array([2, 0, 4, 0]));

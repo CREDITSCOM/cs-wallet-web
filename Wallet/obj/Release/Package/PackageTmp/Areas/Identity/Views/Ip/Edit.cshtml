@@ -1,0 +1,18 @@
+﻿@using Db.DbTable
+@model Db.DbTable.IpNet
+@{
+    ViewBag.Title = "Edit";
+    var nets = ViewBag.Networks as List<Networks>;
+}
+
+<h2>Edit</h2>
+@Html.ValidationMessage("")
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.IdStr)
+    @Html.DropDownListFor(m => m.NetWork, new SelectList(nets, "Id", "Name"))<br />
+    @Html.TextBoxFor(m => m.Ip, new { placeholder = "Ip" })<br />
+    @Html.TextBoxFor(m => m.Aport, new { placeholder = "Aport" })<br />
+    @Html.TextBoxFor(m => m.Tport, new { placeholder = "Tport" })
+    <button>Edit</button>
+}
